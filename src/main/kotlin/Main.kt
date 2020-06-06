@@ -34,7 +34,7 @@ suspend fun main(args: Array<String> = arrayOf()) {
     }
 }
 
-suspend inline fun downloadCoronaData(date: String, mainDataNode: ZooKeeper.Node): Unit = coroutineScope {
+suspend inline fun downloadCoronaData(date: String, mainDataNode: ZooKeeper.Node) = coroutineScope {
     val dataNode = mainDataNode.children.find {
         it.path.endsWith("/$date")
     }

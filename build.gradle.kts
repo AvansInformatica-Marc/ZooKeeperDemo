@@ -1,13 +1,12 @@
 plugins {
     java
-    kotlin("jvm") version "1.4-M1"
+    kotlin("jvm") version "1.3.72"
 }
 
 group = "nl.avans"
 version = "1.0"
 
 repositories {
-    maven("https://dl.bintray.com/kotlin/kotlin-eap")
     mavenCentral()
 }
 
@@ -21,15 +20,15 @@ dependencies {
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions.jvmTarget = "1.8"
     }
 
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions.jvmTarget = "1.8"
     }
 }
