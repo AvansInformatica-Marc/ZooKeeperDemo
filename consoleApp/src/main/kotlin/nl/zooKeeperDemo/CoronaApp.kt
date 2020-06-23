@@ -10,7 +10,7 @@ import java.util.*
 object CoronaApp {
     val currentDate: String = SimpleDateFormat("yyyy-MM-dd").format(Date())
 
-    val resources = Resources()
+    val appResources = AppResources()
 
     suspend inline fun startApp(mainNode: ZooKeeperNode) {
         val coronaDataNode = mainNode.children.find {
@@ -114,7 +114,7 @@ object CoronaApp {
     suspend inline fun writeNewCoronaData(coronaDataNode: ZooKeeperNode, date: String = currentDate) = coroutineScope {
         val dataFileName = "corona-data-rivm_$date.csv"
         val dataFileBytes = async(Dispatchers.IO) {
-            resources[dataFileName]?.readAllBytes()
+            appResources[dataFileName]?.readAllBytes()
         }
 
         val previousData = coronaDataNode.children.maxBy { it.path }
