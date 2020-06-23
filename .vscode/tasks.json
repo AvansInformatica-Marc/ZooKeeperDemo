@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "gradle build",
+            "label": "gradle: build",
             "type": "shell",
             "command": "./gradlew build",
             "problemMatcher": [],
@@ -14,13 +14,13 @@
             }
         },
         {
-            "label": "gradle test",
+            "label": "gradle: test",
             "type": "shell",
             "command": "./gradlew test",
             "problemMatcher": []
         },
         {
-            "label": "gradle clean",
+            "label": "gradle: clean",
             "type": "shell",
             "command": "./gradlew clean",
             "problemMatcher": []

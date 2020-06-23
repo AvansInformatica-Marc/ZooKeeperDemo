@@ -7,6 +7,6 @@ Demo that stores and retrieves data (in this case reported COVID-19 cases in The
 ## Usage
 Import this project into a **recent version** of the IntelliJ IDEA (like 2020.1.2) with Kotlin plugin (stable version 1.3.72 or higher).
 
-Run this project using the green arrow in consoleApp/src/main/kotlin/nl/zooKeeperDemo/Main.kt.
+Run this project using the green arrow in `consoleApp/src/main/kotlin/nl/zooKeeperDemo/Main.kt`.
 
 To modify the host, add program argument `--host "example.com"` or `-h "example.com"` in the run/debug configuration window.

@@ -114,7 +114,7 @@ object CoronaApp {
     suspend inline fun writeNewCoronaData(coronaDataNode: ZooKeeperNode, date: String = currentDate) = coroutineScope {
         val dataFileName = "corona-data-rivm_$date.csv"
         val dataFileBytes = async(Dispatchers.IO) {
-            appResources[dataFileName]?.readAllBytes()
+            appResources[dataFileName]?.readBytes()
         }
 
         val previousData = coronaDataNode.children.maxBy { it.path }
