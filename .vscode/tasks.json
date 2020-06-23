@@ -14,6 +14,12 @@
             }
         },
         {
+            "label": "gradle test",
+            "type": "shell",
+            "command": "./gradlew test",
+            "problemMatcher": []
+        },
+        {
             "label": "gradle clean",
             "type": "shell",
             "command": "./gradlew clean",
