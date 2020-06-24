@@ -17,29 +17,33 @@ object CoronaApp {
             it.path.endsWith("corona-data")
         } ?: mainNode.addChild("corona-data")
 
+        println()
+        printActionList()
+        println()
+
         loop@while(true) {
-            println()
-            println("---")
-            println()
-
-            println("Actions:")
-            println("- list: shows a list of all dates that are available in the system")
-            println("- read: read corona data")
-            println("- download: downloads corona data to \"${System.getProperty("user.home")}${File.separatorChar}CoronaData\"")
-            println("- insert: insert new corona data")
-            println("- exit: exit this app")
-
-            println()
-
             when(awaitInput()) {
                 "list", "l" -> listDates(coronaDataNode)
                 "insert", "i" -> writeNewCoronaData(coronaDataNode, askForDate())
                 "read", "r" -> printCoronaData(coronaDataNode, askForDate())
                 "download", "d" -> downloadCoronaData(coronaDataNode, askForDate())
+                "help", "action", "actions", "h", "a" -> printActionList()
                 "exit", "quit", "q" -> break@loop
                 else -> println("Unknown action, please try again")
             }
+
+            println()
         }
+    }
+
+    fun printActionList() {
+        println("Actions:")
+        println("- list: shows a list of all dates that are available in the system")
+        println("- read: read corona data")
+        println("- download: downloads corona data to \"${System.getProperty("user.home")}${File.separatorChar}CoronaData\"")
+        println("- insert: insert new corona data")
+        println("- help: prints this list")
+        println("- exit: exit this app")
     }
 
     fun listDates(coronaDataNode: ZooKeeperNode) {
@@ -60,7 +64,11 @@ object CoronaApp {
             when {
                 dataNode == null -> println("No data for date $date is found")
                 dataNode.dataAsString.isNullOrBlank() -> println("The data for date $date is empty")
-                else -> println(dataNode.dataAsString)
+                else -> {
+                    println("--- BEGIN OF DATA ---")
+                    println(dataNode.dataAsString)
+                    println("--- END OF DATA ---")
+                }
             }
         }
     }
@@ -97,9 +105,7 @@ object CoronaApp {
 
     fun awaitInput(): String? {
         print("> ")
-        val input = readLine()?.trim()?.toLowerCase()
-        println()
-        return input
+        return readLine()?.trim()?.toLowerCase()
     }
 
     fun askForDate(): String {
