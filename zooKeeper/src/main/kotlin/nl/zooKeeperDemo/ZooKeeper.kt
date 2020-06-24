@@ -64,11 +64,17 @@ object ZooKeeper {
             val spaces = " ".repeat(indent * 2)
             val hasData = !dataAsString.isNullOrBlank()
             val hasChildren = children.isNotEmpty()
+
+            fun getChildrenAsString(): String {
+                val childrenAsString = children.joinToString("\n") { it.getStructure(indent + 1) }
+                return "[\n$childrenAsString\n$spaces]"
+            }
+
             return spaces + when {
                 !hasData && !hasChildren -> path
                 hasData && !hasChildren -> "$path = \"$dataAsString\""
-                !hasData && hasChildren -> "$path: [\n${children.joinToString("\n") { it.getStructure(indent + 1) }}\n$spaces]"
-                else -> "$path = \"$dataAsString\" : [\n${children.joinToString("\n") { it.getStructure(indent + 1) }}\n$spaces]"
+                !hasData && hasChildren -> "$path: ${getChildrenAsString()}"
+                else -> "$path = \"$dataAsString\" : ${getChildrenAsString()}"
             }
         }
 
